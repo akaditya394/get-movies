@@ -12,7 +12,7 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        const transformedMovies = movies.map((movieData) => {
+        const transformedMovies = data.movies.map((movieData) => {
           return {
             id: movieData.episode_id,
             title: movieData.title,
