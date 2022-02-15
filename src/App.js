@@ -6,9 +6,11 @@ import "./App.css";
 function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   async function fetchMoviesHandler() {
     setLoading(true);
+    setError(null);
     const response = await fetch("https://swapi.py4e.com/api/films/");
     const data = await response.json();
 
@@ -24,17 +26,22 @@ function App() {
     setLoading(false);
   }
 
+  let content = <p>Found no movies</p>;
+
+  if (movies.length > 0) {
+    content = <MoviesList movies={movies} />;
+  }
+
+  if (error) {
+    content = { error };
+  }
+
   return (
     <React.Fragment>
       <section>
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
       </section>
-      <section>
-        {!isLoading && <MoviesList movies={movies} />}
-        {isLoading && <p>Loading...</p>}
-        {isLoading && movies.length > 0 && <MoviesList movies={movies}/>}
-        {!isLoading && movies.length === 0 && <p>No movies were found.</p>}
-      </section>
+      <section>{content}</section>
     </React.Fragment>
   );
 }
