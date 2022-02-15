@@ -13,7 +13,7 @@ function App() {
     setError(null);
 
     try {
-      const response = await fetch("https://swapi.py4e.com/api/film/");
+      const response = await fetch("https://swapi.py4e.com/api/films/");
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
@@ -44,10 +44,10 @@ function App() {
   }
 
   if (!isLoading && error) {
-    content = <p>{ error }</p>;
+    content = <p>{error}</p>;
   }
 
-  if(isLoading){
+  if (isLoading) {
     content = <p>Loading...</p>;
   }
 
