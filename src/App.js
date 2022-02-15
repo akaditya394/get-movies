@@ -46,6 +46,10 @@ function App() {
     content = { error };
   }
 
+  if(isLoading){
+    content = <p>Loading...</p>;
+  }
+
   return (
     <React.Fragment>
       <section>
